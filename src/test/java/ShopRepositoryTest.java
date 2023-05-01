@@ -3,10 +3,6 @@ import org.junit.jupiter.api.Test;
 
 public class ShopRepositoryTest {
 
-    Product product1 = new Product(1, "Product1", 10);
-    Product product2 = new Product(2, "Product2", 15);
-    Product product3 = new Product(3, "Product3", 20);
-
 
     @Test
     public void shouldRemoveByIDProductExist() {
@@ -45,10 +41,14 @@ public class ShopRepositoryTest {
         shop.add(product4);
 
 
-        shop.remove(5);
+        // shop.remove(5);
 
         Product[] actual = shop.findAll();
-        Product[] expected = {product1, product2, product3};
-        Assertions.assertArrayEquals(expected, actual);
+        Product[] expected = {product1, product2, product3, product4};
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            shop.remove(5);
+        });
     }
+
+
 }
